@@ -1,0 +1,35 @@
+apiVersion: v2
+name: umbrellahelm
+description: An umbrella chart for deploying the entire Gamesbond application
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+
+dependencies:
+  - name: admin-service
+    version: 0.1.0
+    repository: "file://../admin-service"
+  - name: database
+    version: 0.1.0
+    repository: "file://../database"
+  - name: frontend-service
+    version: 0.1.0
+    repository: "file://../frontend-service"
+  - name: ground-service
+    version: 0.1.0
+    repository: "file://../ground-service"
+  - name: player-service
+    version: 0.1.0
+    repository: "file://../player-service"
+  - name: shop-service
+    version: 0.1.0
+    repository: "file://../shop-service"
+  - name: team-service
+    version: 0.1.0
+    repository: "file://../team-service"
+  - name: tournament-service
+    version: 0.1.0
+    repository: "file://../tournament-service"
+  - name: user-service
+    version: 0.1.0
+    repository: "file://../user-service"

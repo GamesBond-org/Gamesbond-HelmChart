@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.mongo.name }}
+spec:
+  replicas: {{ .Values.mongo.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.mongo.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mongo.name }}
+    spec:
+      containers:
+      - name: {{ .Values.mongo.name }}
+        image: "{{ .Values.mongo.image.name }}:{{ .Values.mongo.image.tag }}"
+        imagePullPolicy: {{ .Values.mongo.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.mongo.service.targetPort }}
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.mongo.name }}-config
+        - secretRef:
+            name: {{ .Values.mongo.name }}-secret
+        resources:
+{{ toYaml .Values.mongo.resources | indent 10 }}
+        securityContext:
+          runAsNonRoot: false
+          allowPrivilegeEscalation: false
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.mongo.service.targetPort }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.mongo.service.targetPort }}
+          initialDelaySeconds: 15
+          periodSeconds: 20

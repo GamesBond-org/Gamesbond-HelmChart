@@ -1,0 +1,13 @@
+# Global configuration values
+global: {}
+
+# Override values for subcharts can be added below
+admin-service: {}
+database: {}
+frontend-service: {}
+ground-service: {}
+player-service: {}
+shop-service: {}
+team-service: {}
+tournament-service: {}
+user-service: {}

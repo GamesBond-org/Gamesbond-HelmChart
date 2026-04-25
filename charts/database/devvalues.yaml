@@ -1,0 +1,36 @@
+name: database
+mongo:
+  name: mongo
+  replicaCount: 1
+  image:
+    name: mongo
+    tag: "7"
+    pullPolicy: Always
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "300m"
+      memory: "256Mi"
+  service:
+    port: 27017
+    targetPort: 27017
+
+redis:
+  name: redis
+  replicaCount: 1
+  image:
+    name: redis
+    tag: "7-alpine"
+    pullPolicy: Always
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "300m"
+      memory: "256Mi"
+  service:
+    port: 6379
+    targetPort: 6379

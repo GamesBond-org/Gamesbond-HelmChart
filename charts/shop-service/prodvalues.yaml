@@ -1,0 +1,23 @@
+name: shop-service
+replicaCount: 3
+rollingUpdate:
+  type: RollingUpdate
+  maxUnavailable: 1
+  maxSurge: 2
+image:
+  name: maheshnandi/gamesbond-shop-service
+  tag: v1.0.0
+  pullPolicy: IfNotPresent
+resources:
+  requests:
+    cpu: "200m"
+    memory: "256Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+service:
+  port: 4006
+  targetPort: 4006
+config:
+  mongourl: "mongodb://mongo-prod:27017"
+  redisurl: "redis://redis-prod:6379"

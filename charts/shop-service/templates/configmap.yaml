@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-config
+data:
+  PORT: "{{ .Values.service.port }}"
+  MONGO_URL: {{ .Values.config.mongourl | quote }}
+  REDIS_URL: {{ .Values.config.redisurl | quote }}

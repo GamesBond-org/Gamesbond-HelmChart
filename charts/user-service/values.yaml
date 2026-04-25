@@ -1,0 +1,23 @@
+name: user-service
+replicaCount: 2
+rollingUpdate:
+  type: RollingUpdate
+  maxUnavailable: 1
+  maxSurge: 1
+image:
+  name: maheshnandi/gamesbond-user-service
+  tag: v1.0.0
+  pullPolicy: IfNotPresent
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "300m"
+    memory: "256Mi"
+service:
+  port: 4001
+  targetPort: 4001
+config:
+  mongourl: "mongodb://mongo:27017"
+  redisurl: "redis://redis:6379"

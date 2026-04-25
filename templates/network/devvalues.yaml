@@ -1,0 +1,10 @@
+gateway:
+  name: gamesbond-gateway
+  className: kgateway
+  port: 80
+
+route:
+  name: frontend-route
+  pathPrefix: /
+  backendName: frontend-service
+  backendPort: 3000

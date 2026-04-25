@@ -11,3 +11,4 @@ shop-service: {}
 team-service: {}
 tournament-service: {}
 user-service: {}
+network: {}

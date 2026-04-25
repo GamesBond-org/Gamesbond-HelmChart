@@ -8,31 +8,40 @@ appVersion: "1.0.0"
 dependencies:
   - name: admin-service
     version: 0.1.0
-    repository: "file://../admin-service"
+    repository: "file://../templates/admin-service"
+
   - name: database
     version: 0.1.0
-    repository: "file://../database"
+    repository: "file://../templates/database"
+
   - name: frontend-service
     version: 0.1.0
-    repository: "file://../frontend-service"
+    repository: "file://../templates/frontend-service"
+
   - name: ground-service
     version: 0.1.0
-    repository: "file://../ground-service"
+    repository: "file://../templates/ground-service"
+
   - name: player-service
     version: 0.1.0
-    repository: "file://../player-service"
+    repository: "file://../templates/player-service"
+
   - name: shop-service
     version: 0.1.0
-    repository: "file://../shop-service"
+    repository: "file://../templates/shop-service"
+
   - name: team-service
     version: 0.1.0
-    repository: "file://../team-service"
+    repository: "file://../templates/team-service"
+
   - name: tournament-service
     version: 0.1.0
-    repository: "file://../tournament-service"
+    repository: "file://../templates/tournament-service"
+
   - name: user-service
     version: 0.1.0
-    repository: "file://../user-service"
+    repository: "file://../templates/user-service"
+
   - name: network
     version: 0.1.0
-    repository: "file://../network"
+    repository: "file://../templates/network"

@@ -5,6 +5,6 @@ gateway:
 
 route:
   name: frontend-route
-  pathPrefix: /
-  backendName: frontend-service
+  path: /
+  backendName: frontend
   backendPort: 3000

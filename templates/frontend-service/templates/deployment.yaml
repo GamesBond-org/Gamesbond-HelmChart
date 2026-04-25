@@ -34,13 +34,13 @@ spec:
           allowPrivilegeEscalation: false
         readinessProbe:
           httpGet:
-            path: /health
+            path: /
             port: {{ .Values.service.targetPort }}
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           httpGet:
-            path: /health
+            path: /
             port: {{ .Values.service.targetPort }}
           initialDelaySeconds: 15
           periodSeconds: 20

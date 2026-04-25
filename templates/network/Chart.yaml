@@ -1,5 +1,5 @@
 apiVersion: v2
-name: gamesbond-gateway
+name: network
 description: Helm chart for Kubernetes Gateway API Gateway and HTTPRoute
 type: application
 version: 0.1.0

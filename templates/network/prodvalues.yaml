@@ -14,5 +14,5 @@ route:
   parentRefName: gamesbond-gateway
   pathPrefix: /
   backend:
-    name: frontend
+    name: frontend-service
     port: 3000

@@ -5,12 +5,12 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   parentRefs:
-  - name: {{ .Values.gateway.name }}
+    - name: {{ .Values.route.parentRefName }}
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: {{ .Values.route.path }}
-    backendRefs:
-    - name: {{ .Values.route.backendName }}
-      port: {{ .Values.route.backendPort }}
+    - matches:
+        - path:
+            type: PathPrefix
+            value: {{ .Values.route.pathPrefix }}
+      backendRefs:
+        - name: {{ .Values.route.backend.name }}
+          port: {{ .Values.route.backend.port }}

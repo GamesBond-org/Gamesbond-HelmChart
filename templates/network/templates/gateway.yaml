@@ -4,11 +4,11 @@ metadata:
   name: {{ .Values.gateway.name }}
   namespace: {{ .Values.namespace }}
 spec:
-  gatewayClassName: {{ .Values.gateway.className }}
+  gatewayClassName: {{ .Values.gateway.gatewayClassName }}
   listeners:
-  - name: http
-    protocol: HTTP
-    port: {{ .Values.gateway.port }}
-    allowedRoutes:
-      namespaces:
-        from: Same
+    - name: {{ .Values.gateway.listener.name }}
+      protocol: {{ .Values.gateway.listener.protocol }}
+      port: {{ .Values.gateway.listener.port }}
+      allowedRoutes:
+        namespaces:
+          from: {{ .Values.gateway.listener.allowedRoutesFrom }}

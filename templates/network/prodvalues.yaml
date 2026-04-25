@@ -2,11 +2,17 @@ namespace: prod
 
 gateway:
   name: gamesbond-gateway
-  className: kgateway
-  port: 80
+  gatewayClassName: kgateway
+  listener:
+    name: http
+    protocol: HTTP
+    port: 80
+    allowedRoutesFrom: Same
 
 route:
   name: frontend-route
-  path: /
-  backendName: frontend
-  backendPort: 3000
+  parentRefName: gamesbond-gateway
+  pathPrefix: /
+  backend:
+    name: frontend
+    port: 3000

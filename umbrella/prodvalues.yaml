@@ -15,7 +15,7 @@ frontend-service:
     tag: v1.0.0
 
 ground-service:
-  replicaCount: 2
+  replicaCount: 1
   image:
     tag: v1.0.0
 
@@ -30,12 +30,12 @@ shop-service:
     tag: v1.0.0
 
 team-service:
-  replicaCount: 2
+  replicaCount: 1
   image:
     tag: v1.0.0
 
 tournament-service:
-  replicaCount: 2
+  replicaCount: 1
   image:
     tag: v1.0.0
 

@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ .Values.redis.name }}
+
 spec:
   serviceName: {{ .Values.redis.name }}
   replicas: {{ .Values.redis.replicaCount }}
@@ -24,8 +25,8 @@ spec:
           ports:
             - containerPort: {{ .Values.redis.service.targetPort }}
 
-
-          resources: {{ toYaml .Values.redis.resources | indent 12 }}
+          resources:
+            {{- toYaml .Values.redis.resources | nindent 12 }}
 
           securityContext:
             runAsNonRoot: true
@@ -54,7 +55,8 @@ spec:
     - metadata:
         name: redis-data
       spec:
-        accessModes: ["ReadWriteMany"]
+        accessModes:
+          - ReadWriteOnce
         resources:
           requests:
             storage: 1Gi

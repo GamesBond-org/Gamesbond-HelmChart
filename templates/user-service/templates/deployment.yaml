@@ -26,6 +26,8 @@ spec:
         envFrom:
         - configMapRef:
             name: {{ .Values.name }}-config
+        - secretRef:
+            name: {{ .Values.name }}-secret
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         securityContext:

@@ -3,6 +3,7 @@ kind: StatefulSet
 metadata:
   name: {{ .Values.mongo.name }}
 spec:
+  serviceName: {{ .Values.mongo.name }}
   replicas: {{ .Values.mongo.replicaCount }}
   selector:
     matchLabels:

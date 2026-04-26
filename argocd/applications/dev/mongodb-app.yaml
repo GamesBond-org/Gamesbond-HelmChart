@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gamesbond-mongodb-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/yourusername/Gamesbond-HelmChart
+    targetRevision: main
+    path: templates/database
+    helm:
+      values: |
+        namespace: dev
+        mongodb:
+          enabled: true
+          replicas: 1
+          storage:
+            size: 5Gi
+      valueFiles:
+      - values.yaml
+      - devvalues.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

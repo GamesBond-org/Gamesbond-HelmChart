@@ -4,7 +4,6 @@ metadata:
   name: {{ .Values.redis.name }}
 
 spec:
-  serviceName: {{ .Values.redis.name }}
   replicas: {{ .Values.redis.replicaCount }}
 
   selector:
@@ -25,17 +24,18 @@ spec:
           ports:
             - containerPort: {{ .Values.redis.service.targetPort }}
 
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.redis.name }}-config
+            - secretRef:
+                name: {{ .Values.redis.name }}-secret
+
           resources:
             {{- toYaml .Values.redis.resources | nindent 12 }}
 
           securityContext:
-            runAsNonRoot: true
-            runAsUser: 999
+            runAsNonRoot: false
             allowPrivilegeEscalation: false
-
-          volumeMounts:
-            - name: redis-data
-              mountPath: /data
 
           readinessProbe:
             tcpSocket:
@@ -44,19 +44,7 @@ spec:
             periodSeconds: 10
 
           livenessProbe:
-            exec:
-              command:
-                - redis-cli
-                - ping
+            tcpSocket:
+              port: {{ .Values.redis.service.targetPort }}
             initialDelaySeconds: 15
             periodSeconds: 20
-
-  volumeClaimTemplates:
-    - metadata:
-        name: redis-data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 1Gi

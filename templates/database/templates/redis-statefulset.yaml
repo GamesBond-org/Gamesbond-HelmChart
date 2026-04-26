@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.redis.name }}
 
 spec:
+  serviceName: {{ .Values.redis.name }}
   replicas: {{ .Values.redis.replicaCount }}
 
   selector:
@@ -60,6 +61,15 @@ spec:
         accessModes:
           - ReadWriteOnce
         storageClassName: nfs-storage
+        resources:
+          requests:
+            storage: 1Gi
+
+  volumeClaimTemplates:
+    - metadata:
+        name: redis-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
         resources:
           requests:
             storage: 1Gi

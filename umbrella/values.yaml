@@ -10,5 +10,7 @@ player-service: {}
 shop-service: {}
 team-service: {}
 tournament-service: {}
-user-service: {}
+user-service:
+  REDIS_URL: redis://redis:6379
+  MONGO_URL: mongodb://mongo:27017
 network: {}

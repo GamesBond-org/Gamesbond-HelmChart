@@ -2,7 +2,7 @@ global:
   environment: production
 
 admin-service:
-  replicaCount: 2
+  replicaCount: 1
   image:
     tag: v1.0.0
 
@@ -10,7 +10,7 @@ database:
   replicaCount: 1
 
 frontend-service:
-  replicaCount: 3
+  replicaCount: 2
   image:
     tag: v1.0.0
 
@@ -40,7 +40,7 @@ tournament-service:
     tag: v1.0.0
 
 user-service:
-  replicaCount: 3
+  replicaCount: 2
 
 network:
   replicaCount: 1

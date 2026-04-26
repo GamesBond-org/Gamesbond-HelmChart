@@ -1,2 +1,46 @@
-# Override with prod specific configurations here if needed
-global: {}
+global:
+  environment: production
+
+admin-service:
+  replicaCount: 2
+  image:
+    tag: v1.0.0
+
+database:
+  replicaCount: 1
+
+frontend-service:
+  replicaCount: 3
+  image:
+    tag: v1.0.0
+
+ground-service:
+  replicaCount: 2
+  image:
+    tag: v1.0.0
+
+player-service:
+  replicaCount: 2
+  image:
+    tag: v1.0.0
+
+shop-service:
+  replicaCount: 2
+  image:
+    tag: v1.0.0
+
+team-service:
+  replicaCount: 2
+  image:
+    tag: v1.0.0
+
+tournament-service:
+  replicaCount: 2
+  image:
+    tag: v1.0.0
+
+user-service:
+  replicaCount: 3
+
+network:
+  replicaCount: 1

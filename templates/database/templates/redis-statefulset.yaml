@@ -3,38 +3,58 @@ kind: StatefulSet
 metadata:
   name: {{ .Values.redis.name }}
 spec:
+  serviceName: {{ .Values.redis.name }}
   replicas: {{ .Values.redis.replicaCount }}
+
   selector:
     matchLabels:
       app: {{ .Values.redis.name }}
+
   template:
     metadata:
       labels:
         app: {{ .Values.redis.name }}
+
     spec:
       containers:
-      - name: {{ .Values.redis.name }}
-        image: "{{ .Values.redis.image.name }}:{{ .Values.redis.image.tag }}"
-        imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
-        ports:
-        - containerPort: {{ .Values.redis.service.targetPort }}
-        envFrom:
-        - configMapRef:
-            name: {{ .Values.redis.name }}-config
-        - secretRef:
-            name: {{ .Values.redis.name }}-secret
+        - name: {{ .Values.redis.name }}
+          image: "{{ .Values.redis.image.name }}:{{ .Values.redis.image.tag }}"
+          imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
+
+          ports:
+            - containerPort: {{ .Values.redis.service.targetPort }}
+
+
+          resources: {{ toYaml .Values.redis.resources | indent 12 }}
+
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 999
+            allowPrivilegeEscalation: false
+
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.redis.service.targetPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 15
+            periodSeconds: 20
+
+  volumeClaimTemplates:
+    - metadata:
+        name: redis-data
+      spec:
+        accessModes: ["ReadWriteMany"]
         resources:
-{{ toYaml .Values.redis.resources | indent 10 }}
-        securityContext:
-          runAsNonRoot: false
-          allowPrivilegeEscalation: false
-        readinessProbe:
-          tcpSocket:
-            port: {{ .Values.redis.service.targetPort }}
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        livenessProbe:
-          tcpSocket:
-            port: {{ .Values.redis.service.targetPort }}
-          initialDelaySeconds: 15
-          periodSeconds: 20
+          requests:
+            storage: 1Gi

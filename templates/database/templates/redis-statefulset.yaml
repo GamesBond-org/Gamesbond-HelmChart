@@ -24,12 +24,6 @@ spec:
           ports:
             - containerPort: {{ .Values.redis.service.targetPort }}
 
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.redis.name }}-config
-            - secretRef:
-                name: {{ .Values.redis.name }}-secret
-
           resources:
             {{- toYaml .Values.redis.resources | nindent 12 }}
 
@@ -48,3 +42,13 @@ spec:
               port: {{ .Values.redis.service.targetPort }}
             initialDelaySeconds: 15
             periodSeconds: 20
+
+  volumeClaimTemplates:
+    - metadata:
+        name: redis-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi

@@ -1,26 +1,22 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: {{ .Values.route.name }}
-  namespace: {{ .Values.namespace }}
-
+  name: gamesbond-route
+  namespace: prod
 spec:
   parentRefs:
-    - name: {{ .Values.route.parentRefName }}
+    - name: gamesbond-gateway
 
-  {{- if .Values.route.hostnames }}
   hostnames:
-  {{- range .Values.route.hostnames }}
-    - {{ . | quote }}
-  {{- end }}
-  {{- end }}
+    - gamesbond.online
+    - www.gamesbond.online
 
   rules:
     - matches:
         - path:
             type: PathPrefix
-            value: {{ .Values.route.pathPrefix }}
+            value: /
 
       backendRefs:
-        - name: {{ .Values.route.backend.name }}
-          port: {{ .Values.route.backend.port }}
+        - name: frontend-service
+          port: 3000

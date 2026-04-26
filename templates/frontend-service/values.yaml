@@ -1,5 +1,5 @@
 name: frontend-service
-replicaCount: 2
+replicaCount: 3
 rollingUpdate:
   type: RollingUpdate
   maxUnavailable: 1

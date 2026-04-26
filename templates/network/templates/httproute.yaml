@@ -8,10 +8,12 @@ spec:
   parentRefs:
     - name: {{ .Values.route.parentRefName }}
 
+  {{- if .Values.route.hostnames }}
   hostnames:
-{{- range .Values.route.hostnames }}
+  {{- range .Values.route.hostnames }}
     - {{ . | quote }}
-{{- end }}
+  {{- end }}
+  {{- end }}
 
   rules:
     - matches:

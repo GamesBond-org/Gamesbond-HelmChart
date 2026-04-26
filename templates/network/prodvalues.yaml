@@ -10,8 +10,13 @@ gateway:
     allowedRoutesFrom: Same
 
 route:
-  name: frontend-route
+  name: gamesbond-route
   parentRefName: gamesbond-gateway
+
+  hostnames:
+    - gamesbond.online
+    - www.gamesbond.online
+
   pathPrefix: /
   backend:
     name: frontend-service

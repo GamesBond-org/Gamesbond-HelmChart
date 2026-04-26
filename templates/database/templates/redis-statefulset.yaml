@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.redis.name }}
 
 spec:
+  serviceName: {{ .Values.redis.name }}
   replicas: {{ .Values.redis.replicaCount }}
 
   selector:
@@ -24,6 +25,12 @@ spec:
           ports:
             - containerPort: {{ .Values.redis.service.targetPort }}
 
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.redis.name }}-config
+            - secretRef:
+                name: {{ .Values.redis.name }}-secret
+
           resources:
             {{- toYaml .Values.redis.resources | nindent 12 }}
 
@@ -43,12 +50,17 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 20
 
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+
   volumeClaimTemplates:
     - metadata:
         name: redis-data
       spec:
         accessModes:
           - ReadWriteOnce
+        storageClassName: nfs-storage
         resources:
           requests:
             storage: 1Gi

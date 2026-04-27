@@ -54,14 +54,6 @@ spec:
             - name: redis-data
               mountPath: /data
 
-  volumeClaimTemplates:
-    - metadata:
-        name: redis-data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        storageClassName: nfs-storage
-        resources:
-          requests:
-            storage: 1Gi
-            
+      volumes:
+        - name: redis-data
+          emptyDir: {}

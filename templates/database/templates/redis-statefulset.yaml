@@ -64,12 +64,3 @@ spec:
         resources:
           requests:
             storage: 1Gi
-
-  volumeClaimTemplates:
-    - metadata:
-        name: redis-data
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 1Gi

@@ -21,3 +21,7 @@ service:
 config:
   mongourl: "mongodb://mongo:27017"
   redisurl: "redis://redis:6379"
+
+db:
+  password: "redis123"
+  username: "admin"
